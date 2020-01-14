@@ -1,9 +1,24 @@
 <h1>Create a Song</h1>
 
 <%= form_for @song  do |f| %>
-  <%= f.label :title %>
+  <%= f.label :title, "Song Title" %>
   <%= f.text_field :title %>
-  <br />
+  <br>
+
+  <%= f.label :artist_name, "Artist Name" %>
+  <%= f.text_field :artist_name %>
+  <br>
+
+  <%= f.label :genre, "Genre" %>
+  <%= f.collection_select :genre_id, Genre.all, :id, :name %>
+  <br>
+
+  <%= f.fields_for :notes do |note_form| %>
+    <%# See: https://api.rubyonrails.org/v5.2.3/classes/ActionView/Helpers/FormHelper.html#method-i-fields_for %>
+    <%= note_form.label :note %>
+    <%= note_form.text_area :content, rows: 5, cols: 50 %>
+    <br/>
+  <% end %>
 
   <%= f.submit %>
 <% end %>
