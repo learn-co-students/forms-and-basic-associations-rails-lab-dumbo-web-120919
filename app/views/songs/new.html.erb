@@ -5,6 +5,24 @@
   <%= f.text_field :title %>
   <br />
 
+  <%= f.label :artist_name, "Artist" %>
+  <%= f.text_field :artist_name %>
+  <br />
+
+  <%= f.label "Select Genre" %>
+  <%= f.collection_select :genre_id, @genres, :id, :name %>
+  <br />
+
+  <h2>Notes</h2>
+    <%= f.fields_for :notes do |note_form| %>
+    <%# See: https://api.rubyonrails.org/v5.2.3/classes/ActionView/Helpers/FormHelper.html#method-i-fields_for %>
+    <%= note_form.label :note %>
+    <%= note_form.text_area :content, rows: 5, cols: 50 %>
+    <br/>
+  <% end %>
+
+  <br />
+
   <%= f.submit %>
 <% end %>
 
